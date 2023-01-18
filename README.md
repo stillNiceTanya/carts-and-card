@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+Тестовое задание. Ответы на вопросы
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+//Q1 
+Расскажите, чем, на ваш взгляд, отличается хорошая верстка от плохой с точки зрения
+-С точки зрения пользователя
+Все кнопки и компоненты видны (в том числе для слабовидящих), страница загрузилась быстро
+Пользователь не должен получать затруднений во время взаимодействия с сайтом, загрузка должна происходить быстро.  
+При скролле, изменении размера страницы, верстка "не прыгает". Интерфейс не должен разъезжаться, элементы не должны друг друга перекрывать и мешать просмотру контента или взаимодействию с элементами страницы, он должен быть интуитивно понятен. Интерфейс должен корректно отображаться во всех браузерах и на всех устройствах.
 
-### `npm start`
+-С точки зрения менеджера проекта
+Вёрстка должна соответствовать ТЗ + код должен быть удобночитаем, чтобы неприятных вопросов у заказчика не возникало. Верстка выполнена в оговоренный срок.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-С точки зрения дизайнера
+Верстка полностью соответствует макету. Спорные вопросы были разрешены до сдачи проекта. Верстка соответствует макету.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-С точки зрения верстальщика
+Правильная верстка с семантической точки зрения, возможность переиспользования компонентов
 
-### `npm test`
+-С точки зренияк клиентского программиста: Хорошая верстка должна быть легко читаема, имеет чёткую структуру, чтобы не было лишней работы в чистке кода, правке стилей и пр. Интуитивно понятно, к чему относится тот или иной блок, код структурирован и в сложных моментах содержит комментарии для разработчика.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-С точки зрения серверного программиста: верстка не нагружает сервер большим количеством запросов, применяется при возможности кэширование, cdn, сжатие gzip и js.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+//Q2 
+Опишите основные особенности верстки крупных многостраничных сайтов, дизайн которых может меняться в процессе реализации и поддержки. Расскажите о своем опыте верстки подобных сайтов: какие методологии, инструменты и технологии вы применяли на практике
 
-### `npm run eject`
+Верстка должна быть выполнена отдельными, независимыми компонентами или блоками которые можно многократно использовать. Обязательно использовать переменные для стилей. Этим можно моментально изменить на всем сайте шрифт, высоту и начертание текста, заголовков, различных элементов интерфейса – например, кнопок.
+Для более-менее крупных проектов нужно использовать методологии web-разработки, например, Agile. В верстке избегать дублирования стилей с помощью  БЭМ.
+Так как пока я делала только небольшие лендинги, полных проектов с использованием препроцессоров у меня нет, но в процессе учебы начинала работать с SCSS. — использование сборщиков, не только компилирующих файлы препроцессора в готовый CSS, но и автоматизирующих рутинные мелочи, например, расстановку префиксов для адекватной поддержки браузерами, сжатие кода и так далее. Например, в проектах с использованием SCSS я пробовала работать с Gulp. — прописывание понятных комментариев, облегчающих дальнейшее понимание кода.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+//Q3 
+Опишите основные особенности верстки сайтов, которые должны одинаково хорошо отображаться как на любом компьютере, смартфонах и планшета. Расскажите о своем опыте верстки подобных сайтов
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+В верстке сайтов, подстраивающихся под разные устройства, на мой взгляд, два ключевых момента — адаптация элементов сайта под разные разрешения экрана с помощью медиа-запросов и работа с изображениями. В адаптивной верстке важно учитывать читаемость шрифтов, адекватную работу интерактивных элементов (например, слайдеров, которые с телефона пользователю логичнее свайпать, чем нажимать на стрелки), прописывать максимальную ширину изображений и оптимизировать.  
+Я применяю подход mobile-first, В CSS предпочитаю использовать flex, grid, сверяюсь с сервисом https://caniuse.com/, когда есть сомнения в применимости свойств для тех или иных браузеров.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+//Q4
+Расскажите, какие инструменты помогают вам экономить время в процессе написания, проверки и отладки кода.
 
-### Code Splitting
+Инструменты:
+IDE VSCode с расширениями
+Gulp + Webpack для сборки проекта
+Git/Github
+Figma
+Chrome DevTools
+https://caniuse.com/
+Lighthouse
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+//Q5
+Вам нужно понять, почему страница отображается некорректно в Safari на iOS и в IE на Windows. Код писали не вы, доступа к исходникам у вас нет. Ваши действия? Сталкивались ли вы с подобными проблемами на практике?
 
-### Making a Progressive Web App
+Для начала я бы открыла неработающую страницу с помощью эмулятора браузера и визуально зафиксировала проблему.
+В указанных браузерах есть инструменты разработчика, которые позволят оперативно посмотреть на проблему. Если проблема в CSS, нужно дописать стили для каждого проблемного браузера.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+//Q6
+Дизайнер отдал вам макет, в котором не показано, как должны выглядеть интерактивные элементы при наведении мыши. Ваши действия?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Связаться с дизайнером и уточнить насчет недостающих состояниях элементов. Если связаться с дизайнером по каким-то причинам невозможно, то спрошу совета у команды и наставника.
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+//Q7
+Какие ресурсы вы используете для развития в профессиональной сфере? Приведите несколько конкретных примеров (сайты, блоги и так далее).
+Какое направление развития вам более близко: JS-программирование, HTML/CSS- верстка или что-то ещё?
+Какие ещё области знаний, кроме тех, что непосредственно относятся к работе, вам интересны?
+
+Ресурсы для развития StackOverflow, Medium, Хабр, CSS-Tricks, курсы от Udacity, learn.javascript.ru.
+Я хочу развиваться как JS и React разработчик
+Также мне инетресны Agile методологии и UI/UX дизайн
+
+
+
+//Q8
+Расскажите нам о себе и предоставьте несколько ссылок на последние работы, выполненные вами.
+
+Меня зовут Татьяна, занимаюсь разработкой последние полтора года
+В настоящее время я заканчиваю пет-проект - функционал шапки лендинга-агрегатора по поиску высшего учебного заведения для выпускников школ
+https://github.com/stillNiceTanya/Header
+
+
+
