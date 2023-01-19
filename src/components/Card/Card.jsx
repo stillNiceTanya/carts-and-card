@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import "./Card.css";
 
 const getPresentAmountText = (amount, words) => {
@@ -21,38 +21,42 @@ const getPresentAmountText = (amount, words) => {
   return `${amount} ${numText}`;
 };
 
-export default function Card({ item, onClick, isSelected, isDisabled }) {
-  const [defaultText, setHoverText] = useState(false);
+export default function Card({ item, onClick, isSelected }) {
+  const { isDisabled, portions, presentAmount, weight, title, subtitle } = item;
+  // [isHovered, setIsHovered]
+  const [isHovered, setIsHovered] = useState(false);
 
-  const handleClick = () => {
+  // лучше везде использовать useCallback для хэндлеров
+  const handleClick = useCallback(() => {
     if (isSelected) {
-      setHoverText(false);
+      setIsHovered(false);
     }
-    onClick(item, item.id);
-  };
+    onClick(item);
+  }, [item, isSelected, onClick]);
 
-  const handleMouseEnter = () => {
-    if (!isSelected) {
-      return;
-    }
-    setHoverText(true);
-  };
-
-  const handleMouseLeave = () => {
+  const handleMouseEnter = useCallback(() => {
     if (!isSelected) return;
-    setHoverText(false);
-  };
 
-  const showTextDescription = () => {
-    if (isDisabled) {
-      return item.isDisabledDescription;
+    setIsHovered(true);
+  }, [isSelected]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (!isSelected) return;
+
+    setIsHovered(false);
+  }, [isSelected]);
+
+  const descriptionText = useMemo(() => {
+    if (item.isDisabled) {
+      return item.disabledDescription;
     } else if (isSelected) {
-      return item.itemDescription;
+      return item.description;
     } else {
       return (
         <>
           Чего сидишь? Порадуй котэ,{" "}
           <button
+            type="button"
             onClick={handleClick}
             className="card-button"
           >
@@ -62,19 +66,19 @@ export default function Card({ item, onClick, isSelected, isDisabled }) {
         </>
       );
     }
-  };
+  }, [item, isSelected, handleClick]);
 
   return (
-    <div>
+    <div className="card-wrapper">
       <div
-        className={`card-wrapper ${isSelected ? "card-wrapper-selected" : ""} ${
-          isDisabled ? "card-wrapper card-wrapper-disabled" : "card-wrapper"
+        className={`card${isSelected ? " card-selected" : ""}${
+          isDisabled ? " card-disabled" : ""
         }`}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {defaultText ? (
+        {isHovered ? (
           <>
             <span className="card-description-selected-leave">
               Котэ не одобряет?
@@ -85,26 +89,24 @@ export default function Card({ item, onClick, isSelected, isDisabled }) {
             <span className="card-description">Сказочное заморское яство</span>
           </>
         )}
-        <h1 className="card-title">{item.title}</h1>
-        <h2 className="card-subtitle">{item.subtitle}</h2>
-        <span className="card-additional">{item.portions} порций</span>
+        <h1 className="card-title">{title}</h1>
+        <h2 className="card-subtitle">{subtitle}</h2>
+        <span className="card-additional">{portions} порций</span>
         <br />
         <span className="card-additional">
-          {getPresentAmountText(item.present, ["мышь", "мыши", "мышей"])} в
+          {getPresentAmountText(presentAmount, ["мышь", "мыши", "мышей"])} в
           подарок
         </span>
         <div
-          className={
-            isSelected
-              ? "weight-info weight-info-selected"
-              : "weight-info weight-info-default"
-          }
+          className={`weight-info${isDisabled ? " disabled" : ""}${
+            isSelected ? " selected" : ""
+          }`}
         >
-          <span className="weight-amount">{item.weightInfo}</span>
+          <span className="weight-amount">{weight}</span>
           <span className="weight-unit">кг</span>
         </div>
       </div>
-      <p className="card-cta">{showTextDescription()}</p>
+      <p className="card-cta">{descriptionText}</p>
     </div>
   );
 }

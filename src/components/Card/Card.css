@@ -1,4 +1,4 @@
-.card-wrapper {
+.card {
   cursor: pointer;
   background-image: url("../../img/card-img-background-obj.png");
   background-size: contain;
@@ -13,15 +13,15 @@
   border-radius: 15px;
 }
 
-.card-wrapper-disabled {
+.card-disabled {
   border: 4px solid #666666;
 }
 
-.card-wrapper-selected {
+.card-selected {
   border: 4px solid #d91667;
 }
 
-.card-wrapper-disabled::after {
+.card-disabled::after {
   position: absolute;
   content: "";
   top: 0;
@@ -29,7 +29,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  background-color: rgba(255, 255, 255, 0.762);
+  background-color: rgba(255, 255, 255, 0.646);
   border-radius: 15px;
 }
 
@@ -116,6 +116,7 @@
   text-align: center;
   flex-direction: column;
   justify-content: center;
+  background-color: #1698d9;
 }
 
 .weight-amount {
@@ -127,14 +128,46 @@
   line-height: 22px;
 }
 
-.weight-info-default {
-  background-color: #1698d9;
-}
-
-.weight-info-selected {
+.weight-info.selected {
   background-color: #d91667;
 }
 
-.weight-info-disabled {
+.weight-info.disabled {
   background-color: #b3b3b3;
+}
+
+@supports (clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%, 0 40px)) {
+  .card {
+    clip-path: polygon(40px 0, 100% 0, 100% 100%, 0 100%, 0 40px);
+  }
+
+  .card::before {
+    content: "";
+    display: block;
+    transform: rotate(-45deg);
+    position: absolute;
+    transform-origin: bottom left;
+    top: 30px;
+    left: 0;
+    width: 53px;
+    height: 7px;
+    background: #1698d9;
+  }
+
+  .card-disabled::before {
+    background: #666666;
+  }
+
+  .card.card-disabled {
+    border: 4px solid #666666;
+    cursor: not-allowed;
+  }
+
+  .card-selected::before {
+    background: #d91667;
+  }
+
+  .card.card-selected {
+    border: 4px solid #d91667;
+  }
 }
